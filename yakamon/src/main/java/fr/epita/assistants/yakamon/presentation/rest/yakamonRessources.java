@@ -34,7 +34,7 @@ public class yakamonRessources
 
         try
         {
-            List<List<TileType>> tiles = gameService.startGame(request.mapPath, request.playerName);
+            List<List<TileType>> tiles = gs.startGame(request.mapPath, request.playerName);
             startResponse response = new startResponse(tiles);
             return Response.ok(response).build();
         } catch (Exception e) {

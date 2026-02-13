@@ -87,9 +87,7 @@ public class gameService
                 Collectible collectible = getCollectible(collectibleChar);
 
                 for (int c = 0; c < count; c++) {
-                    TileType tile = new TileType();
-                    tile.terrainType = terrain;
-                    tile.collectible = collectible;
+                    TileType tile = new TileType(terrain, collectible);
                     rowTiles.add(tile);
                 }
                 i += 3;
@@ -98,6 +96,8 @@ public class gameService
         }
         return mapTiles;
     }
+
+
 
     private TerrainType getTerrain(char c) {
         switch (c) {
@@ -112,37 +112,24 @@ public class gameService
     }
 
     private Collectible getCollectible(char c) {
-        if (c == 'N') return null;
+        if (c == 'N') return ItemType.NONE;
+        if (c == 'S') return ItemType.SCROOGE;
+        if (c == 'Y') return ItemType.YAKABALL;
 
-        Collectible col = new Collectible();
-        if (c == 'S') {
-            col.type = CollectibleType.ITEM;
-            col.value = "SCROOGE";
-        } else if (c == 'Y') {
-            col.type = CollectibleType.ITEM;
-            col.value = "YAKABALL";
-        } else {
-            col.type = CollectibleType.YAKAMON;
-            col.value = getYakamonName(c);
-        }
-        return col;
+        return getYakamonType(c);
     }
 
-    private String getYakamonName(char c) {
+    private YakamonType getYakamonType(char c) {
         switch (c) {
-            case 'y': return "Yakimon";
-            case 'n': return "Nicotali";
-            case 'o': return "Louicune";
-            case 'g': return "Grouvan";
-            case 'b': return "Bastiedon";
-            case 'l': return "Lucarya";
-            case 'r': return "Rayquaïssa";
-            case 'k': return "Koyako";
-            default: return "Yakimon";
+            case 'y': return YakamonType.YAKIMON;
+            case 'n': return YakamonType.NICOTALI;
+            case 'o': return YakamonType.LOUICUNE;
+            case 'g': return YakamonType.GROUVAN;
+            case 'b': return YakamonType.BASTIEDON;
+            case 'l': return YakamonType.LUCARYA;
+            case 'r': return YakamonType.RAYQUAÏSSA;
+            case 'k': return YakamonType.KOYAKO;
+            default: return YakamonType.YAKIMON;
         }
     }
-
-
-
-
 }
